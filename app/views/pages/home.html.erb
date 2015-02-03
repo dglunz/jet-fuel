@@ -1,5 +1,26 @@
-<%= form_for(@url, remote: true) do |f| %>
-  <%= f.label "Ugly URL:", id: "urlLabel" %>
-  <%= f.text_field :original %>
-  <%= f.submit "Make Beautiful" %>
-<% end %>
+<div class="row">
+  <%= form_for(@url, remote: true) do |f| %>
+    <%= f.label "Ugly URL:", id: "urlLabel" %>
+    <%= f.text_field :original %>
+    <%= f.submit "Make Beautiful" %>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h1>New Links</h1>
+    <table id="new">
+      <% @urls.newest.each do |url| %>
+        <td><%= url.original %></td>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <h1>Popular Links</h1>
+    <table id="popular">
+      <% @urls.popular.each do |url| %>
+        <td><%= url.original %></td>
+      <% end %>
+    </table>
+  </div>
+</div>
