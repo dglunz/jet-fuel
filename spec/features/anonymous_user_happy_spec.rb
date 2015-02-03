@@ -34,8 +34,28 @@ feature 'Anonymous User visits the site and enters an ugly URL' do
   end
 
   scenario 'they expected the most popular links' do
+    url_1 = Url.create!(original: 'https://www.twitter.com', popularity: 8)
+    url_2 = Url.create!(original: 'https://www.google.com', popularity: 4)
+    url_3 = Url.create!(original: 'https://www.facebook.com', popularity: 9)
+    expected_popular = [url_3.original, url_1.original, url_2.original]
+
+    visit root_path
+    actual_popular = all('#popular td').map(&:text)
+
+    expect(actual_popular).to eq expected_popular
+    expect(page).to have_content "Popular Links"
   end
 
   scenario 'they expected the newest links' do
+    url_1 = Url.create!(original: 'https://www.twitter.com')
+    url_2 = Url.create!(original: 'https://www.google.com')
+    url_3 = Url.create!(original: 'https://www.facebook.com')
+    expected_new = [url_1.original, url_2.original, url_3.original]
+
+    visit root_path
+    actual_new = all('#new td').map(&:text)
+
+    expect(actual_new).to eq expected_new
+    expect(page).to have_content "New Links"
   end
 end
