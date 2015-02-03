@@ -14,6 +14,18 @@ feature 'Anonymous User visits the site and enters an ugly URL' do
     expect(input).to have_content url_path(url)
   end
 
+  scenario 'that has already been made beautiful', js: true do
+    Url.create!(original: 'https://www.twitter.com')
+    visit root_path
+
+    fill_in 'url[original]', with: 'https://www.twitter.com'
+    click_button 'Make Beautiful'
+    sleep(0.5)
+    urls = Url.all
+
+    expect(urls.count).to eq 1
+  end
+
   scenario 'they click the beautiful one' do
     url = Url.create!(original: 'https://www.twitter.com')
     visit url_path(url)

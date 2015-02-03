@@ -1,6 +1,7 @@
 class UrlsController < ApplicationController
   def create
-    @url = Url.new(url_params)
+    @url = Url.find_by(original: params[:url][:original])
+    @url = Url.new(url_params) if @url.blank?
     respond_to do |format|                                                           
       @url.save ? format.js : format.js { render "failed" }
     end
