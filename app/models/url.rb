@@ -5,7 +5,6 @@ class Url < ActiveRecord::Base
   before_save :generate_short_url
 
   def generate_short_url
-    url.short = ('a'..'z').to_a.shuffle[0,5].join
-    true
+    self.short = ('a'..'z').to_a.shuffle[0,5].join
   end
 end

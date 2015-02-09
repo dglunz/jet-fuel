@@ -19,7 +19,6 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'capybara-webkit'
   gem 'database_cleaner'
 end
 
